@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Main Application & Calculator Workspace -->
   <url>
-    <loc>https://statmasterpro.com/</loc>
+    <loc>https://routesoft.github.io/statmasterpro/</loc>
     <lastmod>2025-05-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -10,7 +10,7 @@
   
   <!-- Guide & SEO Blog Section -->
   <url>
-    <loc>https://statmasterpro.com/#blog-article</loc>
+    <loc>https://routesoft.github.io/statmasterpro/#blog-article</loc>
     <lastmod>2025-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -18,7 +18,7 @@
 
   <!-- About Us Section -->
   <url>
-    <loc>https://statmasterpro.com/#about-section</loc>
+    <loc>https://routesoft.github.io/statmasterpro/#about-section</loc>
     <lastmod>2025-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -26,7 +26,7 @@
 
   <!-- Contact Section -->
   <url>
-    <loc>https://statmasterpro.com/#contact-section</loc>
+    <loc>https://routesoft.github.io/statmasterpro/#contact-section</loc>
     <lastmod>2025-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
