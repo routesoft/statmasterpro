@@ -1,0 +1,6 @@
+# robots.txt for StatMaster Pro
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://statmasterpro.com/sitemap.xml
