@@ -1,6 +1,6 @@
-# robots.txt for StatMaster Pro
+# robots.txt for StatMaster Pro (GitHub Pages)
 User-agent: *
 Allow: /
 
 # Sitemap Location
-Sitemap: https://routesoft.github.io/statmasterpro//sitemap.xml
+Sitemap: https://routesoft.github.io/statmasterpro/sitemap.xml
