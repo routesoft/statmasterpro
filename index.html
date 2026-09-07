@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50 scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>StatMaster Pro | Free Online Statistical Calculator & Data Visualizer</title>
+    <meta name="title" content="StatMaster Pro | Free Online Statistical Calculator & Data Visualizer">
+    <meta name="description" content="Calculate mean, median, mode, variance, standard deviation, quartiles, and generate instant interactive histograms, bar charts, and doughnut charts. 100% free, browser-based, and private.">
+    <meta name="keywords" content="statistical calculator, descriptive statistics, mean median mode calculator, standard deviation calculator, variance calculator, data visualization, histogram generator, box plot, Q1 Q3 IQR, student statistics tool">
+    <meta name="author" content="StatMaster Pro Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://statmasterpro.com/">
+
+    <!-- Favicon Links (Embedded SVG & standard icons) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%232563eb%22/><path d=%22M30 70 L43 45 L57 58 L70 30%22 stroke=%22white%22 stroke-width=%228%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/><circle cx=%2270%22 cy=%2230%22 r=%226%22 fill=%22white%22/></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%232563eb%22/><path d=%22M30 70 L43 45 L57 58 L70 30%22 stroke=%22white%22 stroke-width=%228%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/><circle cx=%2270%22 cy=%2230%22 r=%226%22 fill=%22white%22/></svg>">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://statmasterpro.com/">
+    <meta property="og:title" content="StatMaster Pro | Free Online Statistical Calculator & Data Visualizer">
+    <meta property="og:description" content="Instant descriptive statistics and interactive charts. Calculate mean, median, mode, variance, standard deviation, and quartiles right in your browser.">
+    <meta property="og:image" content="https://statmasterpro.com/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://statmasterpro.com/">
+    <meta property="twitter:title" content="StatMaster Pro | Free Online Statistical Calculator & Data Visualizer">
+    <meta property="twitter:description" content="Instant descriptive statistics and interactive charts. Calculate mean, median, mode, variance, standard deviation, and quartiles right in your browser.">
+
+    <!-- Schema.org JSON-LD Structured Data for Technical SEO & Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "StatMaster Pro",
+      "url": "https://statmasterpro.com/",
+      "description": "Powerful web-based statistical analysis and visualization tool for students and researchers. Compute descriptive statistics and interactive charts instantly.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "browser": "Requires JavaScript. Works in all modern web browsers.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How do I input data into StatMaster Pro?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can paste or type numbers separated by commas, spaces, or newlines directly into the dataset input box. The system automatically validates and parses numeric values."
+        }
+      }, {
+        "@type": "Question",
+        "name": "What statistical metrics does StatMaster Pro calculate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "StatMaster Pro calculates Total Count (N), Mean, Median, Mode, Range, Sample Variance, Sample Standard Deviation, Minimum, Maximum, Q1, Q3, and Interquartile Range (IQR)."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is my dataset stored or uploaded to a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. StatMaster Pro operates 100% client-side inside your web browser. Your data remains completely private and secure on your device."
+        }
+      }]
+    }
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="h-full font-sans text-slate-800 antialiased flex flex-col selection:bg-primary-100 selection:text-primary-700">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary-600 to-blue-400 flex items-center justify-center text-white shadow-md shadow-primary-500/20">
+                    <i class="fa-solid fa-chart-pie text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-bold text-slate-900 leading-tight">StatMaster <span class="text-primary-600">Pro</span></span>
+                    <span class="block text-[10px] text-slate-500 font-medium">Statistical Analysis Suite</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-1 font-medium text-sm">
+                <a href="#calculator" class="px-3.5 py-2 rounded-lg text-primary-600 bg-primary-50/80 transition">Calculator</a>
+                <a href="#blog-article" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition">Guide & Blog</a>
+                <a href="#about-section" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition">About Us</a>
+                <a href="#contact-section" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition">Contact</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="loadSampleData()" class="hidden sm:inline-flex items-center space-x-2 px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition border border-slate-200">
+                    <i class="fa-solid fa-wand-magic-sparkles text-primary-600"></i>
+                    <span>Sample Data</span>
+                </button>
+                <button onclick="clearAll()" class="inline-flex items-center space-x-1.5 px-3 py-2 text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg transition">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Reset</span>
+                </button>
+                <!-- Mobile Menu Toggle -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#calculator" onclick="toggleMobileMenu()" class="block w-full px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100">Calculator</a>
+            <a href="#blog-article" onclick="toggleMobileMenu()" class="block w-full px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100">Guide & Blog</a>
+            <a href="#about-section" onclick="toggleMobileMenu()" class="block w-full px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100">About Us</a>
+            <a href="#contact-section" onclick="toggleMobileMenu()" class="block w-full px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 flex flex-col">
+
+        <!-- ================= SECTION 1: CALCULATOR WORKSPACE ================= -->
+        <section id="calculator" class="max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Left Column: Input Panel & Sorted Array -->
+            <div class="lg:col-span-4 flex flex-col space-y-6">
+                <!-- Data Input Card -->
+                <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-5 flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                        <label for="raw-data" class="text-sm font-semibold text-slate-900 flex items-center space-x-2">
+                            <i class="fa-solid fa-keyboard text-primary-600"></i>
+                            <span>Dataset Input</span>
+                        </label>
+                        <span id="data-count-badge" class="text-xs font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">0 items</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-3">Paste or type your numbers separated by commas, spaces, or newlines.</p>
+                    
+                    <textarea id="raw-data" rows="7" placeholder="e.g., 12, 45, 23, 67, 12, 34, 89, 21" 
+                        class="w-full font-mono text-sm p-3.5 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition resize-none bg-slate-50/50"></textarea>
+                    
+                    <!-- Validation Error Box -->
+                    <div id="error-box" class="hidden mt-3 p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 flex items-start space-x-2">
+                        <i class="fa-solid fa-circle-exclamation mt-0.5 text-rose-500 flex-shrink-0"></i>
+                        <span id="error-message">Invalid input detected.</span>
+                    </div>
+
+                    <button onclick="processData()" class="mt-4 w-full bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-primary-600/20 transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-calculator"></i>
+                        <span>Calculate & Visualize</span>
+                    </button>
+                </div>
+
+                <!-- Sorted Array View -->
+                <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-5 flex flex-col flex-1">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-semibold text-slate-900 flex items-center space-x-2">
+                            <i class="fa-solid fa-list-ol text-primary-600"></i>
+                            <span>Sorted Data View</span>
+                        </h3>
+                        <span class="text-xs text-slate-400">Ascending (min → max)</span>
+                    </div>
+                    <div id="sorted-data-container" class="bg-slate-50 border border-slate-200/70 rounded-xl p-3.5 font-mono text-xs text-slate-600 max-h-40 overflow-y-auto flex-1 select-all">
+                        <span class="text-slate-400 italic">No dataset processed yet...</span>
+                    </div>
+                    <div class="mt-3 text-xs text-slate-500 flex justify-between items-center border-t border-slate-100 pt-3">
+                        <span>Unique Values: <strong id="unique-count" class="text-slate-700">0</strong></span>
+                        <button onclick="copySortedData()" class="text-primary-600 hover:underline font-medium"><i class="fa-regular fa-copy mr-1"></i>Copy Array</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Dashboard / Stats & Charts -->
+            <div class="lg:col-span-8 flex flex-col space-y-6">
+                
+                <!-- Empty State Notice -->
+                <div id="empty-state" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-12 text-center flex flex-col items-center justify-center flex-1 min-h-[450px]">
+                    <div class="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center text-primary-600 mb-4 shadow-inner">
+                        <i class="fa-solid fa-chart-column text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Awaiting Your Dataset</h3>
+                    <p class="text-sm text-slate-500 max-w-sm mb-6">Enter your raw numbers on the left or click "Sample Data" to instantly uncover descriptive metrics and interactive charts.</p>
+                    <button onclick="loadSampleData()" class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs rounded-xl shadow transition">
+                        Try Quick Demo Dataset
+                    </button>
+                    <div class="mt-8 pt-6 border-t border-slate-100 text-xs text-slate-400 flex items-center justify-center space-x-4">
+                        <span><i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> 100% Client-Side Private</span>
+                        <span><i class="fa-solid fa-bolt text-amber-500 mr-1"></i> Instant Execution</span>
+                    </div>
+                </div>
+
+                <!-- Active Dashboard Content (Hidden by default) -->
+                <div id="dashboard-content" class="hidden flex flex-col space-y-6">
+                    
+                    <!-- Key Metrics Grid Cards -->
+                    <div>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 px-1">Core Descriptive Metrics</h2>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                                <p class="text-xs font-medium text-slate-500 mb-1">Count (N)</p>
+                                <h4 id="stat-n" class="text-2xl font-bold text-slate-900">0</h4>
+                                <span class="text-[10px] text-slate-400">Total Observations</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                                <p class="text-xs font-medium text-slate-500 mb-1">Mean (Average)</p>
+                                <h4 id="stat-mean" class="text-2xl font-bold text-primary-600 truncate">0</h4>
+                                <span class="text-[10px] text-slate-400">Arithmetic center</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                                <p class="text-xs font-medium text-slate-500 mb-1">Median</p>
+                                <h4 id="stat-median" class="text-2xl font-bold text-slate-900 truncate">0</h4>
+                                <span class="text-[10px] text-slate-400">50th percentile</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                                <p class="text-xs font-medium text-slate-500 mb-1">Mode</p>
+                                <h4 id="stat-mode" class="text-lg font-bold text-slate-900 truncate pt-1">0</h4>
+                                <span class="text-[10px] text-slate-400">Most frequent</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Secondary Spread Metrics Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-sm">
+                            <span class="text-[11px] font-medium text-slate-500 block">Range</span>
+                            <span id="stat-range" class="text-base font-bold text-slate-800">0</span>
+                            <span class="text-[9px] text-slate-400 block mt-0.5">Max - Min</span>
+                        </div>
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-sm">
+                            <span class="text-[11px] font-medium text-slate-500 block">Sample Std Dev (s)</span>
+                            <span id="stat-sd" class="text-base font-bold text-slate-800">0</span>
+                            <span class="text-[9px] text-slate-400 block mt-0.5">Dispersion measure</span>
+                        </div>
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-sm">
+                            <span class="text-[11px] font-medium text-slate-500 block">Sample Variance (s²)</span>
+                            <span id="stat-variance" class="text-base font-bold text-slate-800 truncate block">0</span>
+                            <span class="text-[9px] text-slate-400 block mt-0.5">Squared deviation</span>
+                        </div>
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-sm">
+                            <span class="text-[11px] font-medium text-slate-500 block">Interquartile Range</span>
+                            <span id="stat-iqr" class="text-base font-bold text-slate-800">0</span>
+                            <span class="text-[9px] text-slate-400 block mt-0.5">Q3 - Q1</span>
+                        </div>
+                    </div>
+
+                    <!-- Quartiles & Min/Max breakdown strip -->
+                    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-4 flex flex-wrap items-center justify-between text-xs text-slate-600 gap-4">
+                        <div class="flex items-center space-x-6">
+                            <div><span class="text-slate-400 block text-[10px]">MINIMUM</span><strong id="stat-min" class="text-sm text-slate-800">0</strong></div>
+                            <div class="border-l border-slate-200 pl-6"><span class="text-slate-400 block text-[10px]">Q1 (25TH %)</span><strong id="stat-q1" class="text-sm text-slate-800">0</strong></div>
+                            <div class="border-l border-slate-200 pl-6"><span class="text-slate-400 block text-[10px]">Q3 (75TH %)</span><strong id="stat-q3" class="text-sm text-slate-800">0</strong></div>
+                            <div class="border-l border-slate-200 pl-6"><span class="text-slate-400 block text-[10px]">MAXIMUM</span><strong id="stat-max" class="text-sm text-slate-800">0</strong></div>
+                        </div>
+                        <div class="bg-primary-50 text-primary-700 px-3 py-1.5 rounded-xl font-medium">
+                            Sum (&Sigma;x): <span id="stat-sum">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Visualizations Section -->
+                    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-slate-100 gap-3">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900">Interactive Visualizations</h3>
+                                <p class="text-xs text-slate-500">Explore distribution patterns and value proportions</p>
+                            </div>
+                            <div class="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold">
+                                <button onclick="switchChart('bar')" id="btn-bar" class="px-3 py-1.5 rounded-lg transition text-primary-600 bg-white shadow-sm">Frequency Bar</button>
+                                <button onclick="switchChart('histogram')" id="btn-histogram" class="px-3 py-1.5 rounded-lg transition text-slate-600 hover:text-slate-900">Distribution</button>
+                                <button onclick="switchChart('doughnut')" id="btn-doughnut" class="px-3 py-1.5 rounded-lg transition text-slate-600 hover:text-slate-900">Proportions</button>
+                                <button onclick="switchChart('boxplot')" id="btn-boxplot" class="px-3 py-1.5 rounded-lg transition text-slate-600 hover:text-slate-900">Spread View</button>
+                            </div>
+                        </div>
+
+                        <div class="relative w-full h-[320px] flex items-center justify-center">
+                            <canvas id="statChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SECTION 2: SEO BLOG & CONTENT (Directly Crawlable) ================= -->
+        <section id="blog-article" class="max-w-4xl w-full mx-auto px-4 sm:px-6 py-12">
+            <article class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-12 space-y-8">
+                
+                <!-- Blog Header -->
+                <div class="space-y-3 border-b border-slate-100 pb-8">
+                    <div class="flex items-center space-x-2 text-xs font-semibold text-primary-600 uppercase tracking-wider">
+                        <span class="bg-primary-50 px-2.5 py-1 rounded-md">Statistical Guide & Documentation</span>
+                        <span>&bull;</span>
+                        <span>6 min read</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                        StatMaster Pro: The Ultimate Web Tool for Students and Researchers to Master Statistics Instantly
+                    </h1>
+                    <p class="text-sm sm:text-base text-slate-500">
+                        How lightweight browser-based calculators are replacing bulky desktop software for high schoolers, university students, and empirical researchers.
+                    </p>
+                </div>
+
+                <!-- Blog Body Content -->
+                <div class="prose prose-slate max-w-none text-slate-700 text-sm sm:text-base leading-relaxed space-y-6">
+                    <p>
+                        Statistics can feel like an uphill battle. Whether you are dealing with raw experimental data in a university lab, tackling complex homework problems in high school, or analyzing survey metrics for a research paper, the manual calculations can quickly become overwhelming. Finding the mean, median, mode, variance, standard deviation, and plotting accurate visual charts requires both time and precision. A single arithmetic error early in the sequence can throw off your entire final result.
+                    </p>
+                    <p>
+                        Enter <strong>StatMaster Pro</strong>—a powerful, lightning-fast, and completely web-based statistical analysis tool designed specifically to take the friction out of data analysis. Built to run seamlessly right inside your browser with zero installation required, StatMaster Pro delivers instant descriptive statistics and stunning visual graphs the moment you paste your dataset.
+                    </p>
+
+                    <h2 class="text-xl font-bold text-slate-900 pt-4">Why Students and Researchers Struggle with Traditional Statistics Tools</h2>
+                    <p>
+                        For generations, students have relied on a mix of handheld scientific calculators, bulky spreadsheet software like Microsoft Excel, or heavy statistical packages like SPSS and R. While powerful, these traditional tools come with steep learning curves that slow down productivity:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li><strong>The Software Bloat:</strong> Downloading heavy desktop software or navigating complex user interfaces just to find the mean and median of twenty numbers is counterproductive.</li>
+                        <li><strong>Steep Learning Curves:</strong> Writing code libraries in Python or navigating multi-layered menus in enterprise software creates unnecessary hurdles for everyday academic assignments.</li>
+                        <li><strong>Lack of Instant Visualization:</strong> Generating clean, presentation-ready histograms, bar charts, and pie charts often involves tedious manual configuration in spreadsheet applications.</li>
+                        <li><strong>Compatibility Issues:</strong> Many legacy applications require specific operating systems, updates, or expensive license keys that student budgets cannot accommodate.</li>
+                    </ul>
+                    <p>
+                        StatMaster Pro was built from the ground up to solve these exact friction points by offering a modern, minimalist, and high-performance web solution.
+                    </p>
+
+                    <h2 class="text-xl font-bold text-slate-900 pt-4">Core Features of StatMaster Pro</h2>
+                    <p>
+                        StatMaster Pro packs a complete statistical workspace into a clean, intuitive, and professional interface. Here is a breakdown of what the software offers out of the box:
+                    </p>
+
+                    <h3 class="text-lg font-semibold text-slate-900 pt-2">1. Instant Data Ingestion and Validation</h3>
+                    <p>
+                        The tool features a large, responsive text input area where users can effortlessly paste or type raw data separated by commas, spaces, or newlines. Whether your data looks like <code>12, 45, 23, 67, 12</code> or is formatted across multiple rows, the smart parser cleans and validates the input instantly. If accidental non-numeric characters are entered, the system alerts you immediately, ensuring data integrity before any calculations run.
+                    </p>
+
+                    <h3 class="text-lg font-semibold text-slate-900 pt-2">2. Comprehensive Descriptive Statistics Panel</h3>
+                    <p>Once your data is loaded, StatMaster Pro instantly computes and displays a full suite of descriptive statistics metrics on clean, modern cards:</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li><strong>Total Count ($N$):</strong> The exact size of your dataset.</li>
+                        <li><strong>Mean:</strong> The arithmetic average of your numbers.</li>
+                        <li><strong>Median:</strong> The exact middle value when data is sorted in ascending order.</li>
+                        <li><strong>Mode:</strong> The most frequently occurring value (with multi-mode detection).</li>
+                        <li><strong>Range:</strong> The difference between the maximum and minimum values.</li>
+                        <li><strong>Variance & Standard Deviation:</strong> Measures of data spread for both sample and population datasets.</li>
+                        <li><strong>Minimum and Maximum:</strong> Quick identification of dataset boundaries.</li>
+                        <li><strong>Quartiles & IQR:</strong> $Q1$, $Q3$, and the Interquartile Range for deeper distribution analysis.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-semibold text-slate-900 pt-2">3. Dynamic Interactive Visualizations</h3>
+                    <p>Numbers alone only tell half the story. StatMaster Pro integrates advanced charting libraries to automatically transform raw numbers into vibrant, interactive visual representations:</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li><strong>Histograms & Frequency Distribution Charts:</strong> Visualize how data points cluster across different frequency bins.</li>
+                        <li><strong>Bar Charts:</strong> Compare individual data point frequencies cleanly.</li>
+                        <li><strong>Proportional Pie & Doughnut Charts:</strong> See fractional breakdowns and category proportions at a glance.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-semibold text-slate-900 pt-2">4. Step-by-Step Calculation View</h3>
+                    <p>
+                        For students learning statistics for the first time, understanding <em>how</em> an answer is derived is just as important as the answer itself. StatMaster Pro includes a toggleable step-by-step view that displays your sorted dataset in ascending order, making it effortless to cross-check manual homework steps and verify calculations.
+                    </p>
+
+                    <h2 class="text-xl font-bold text-slate-900 pt-4">The Technical Edge: Why Lightweight Web Tools Win</h2>
+                    <p>
+                        StatMaster Pro operates as a modern single-file web application powered by lightweight web standards. By utilizing Tailwind CSS for its responsive, professional blue-and-white interface and Chart.js for high-performance vector rendering, the application loads in milliseconds.
+                    </p>
+                    <p>
+                        Because it runs entirely client-side within your browser, your data remains completely private and secure on your local device. There is no server-side database logging your personal inputs, ensuring absolute privacy for school assignments and institutional projects.
+                    </p>
+
+                    <h2 class="text-xl font-bold text-slate-900 pt-4">Who is StatMaster Pro For?</h2>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li><strong>High School and University Students:</strong> Perfect for double-checking statistics homework, lab reports, and math projects quickly and accurately.</li>
+                        <li><strong>Researchers and Educators:</strong> Useful for quickly testing sample data distributions during lectures or drafting initial data insights.</li>
+                        <li><strong>Data Enthusiasts and Hobbyists:</strong> Anyone looking for a quick, no-fuss calculator to analyze numerical sets without firing up a heavy IDE or spreadsheet program.</li>
+                    </ul>
+
+                    <h2 class="text-xl font-bold text-slate-900 pt-4">Conclusion</h2>
+                    <p>
+                        Statistical analysis does not have to be a tedious, error-prone chore. By combining instant mathematical processing with clean, dynamic visual charts into a zero-installation web interface, StatMaster Pro bridges the gap between raw data and actionable insight. Whether you are racing against a midnight homework deadline or preparing clean charts for a major presentation, StatMaster Pro gives you the speed, accuracy, and clarity you need to master your data effortlessly.
+                    </p>
+                </div>
+
+                <div class="pt-8 border-t border-slate-100 flex justify-center">
+                    <a href="#calculator" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl shadow-lg shadow-primary-600/20 transition flex items-center space-x-2">
+                        <i class="fa-solid fa-calculator"></i>
+                        <span>Launch StatMaster Pro Calculator Now</span>
+                    </a>
+                </div>
+            </article>
+        </section>
+
+
+        <!-- ================= SECTION 3: ABOUT US ================= -->
+        <section id="about-section" class="max-w-4xl w-full mx-auto px-4 sm:px-6 py-12">
+            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-12 space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-3">
+                    <span class="text-xs font-semibold text-primary-600 uppercase tracking-wider bg-primary-50 px-3 py-1 rounded-full">About Our Mission</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900">Empowering Students to Master Quantitative Analysis</h2>
+                    <p class="text-slate-500 text-sm sm:text-base">StatMaster Pro was built by data scientists and educators who believe statistical tools should be accessible, lightning-fast, and distraction-free.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/60">
+                        <div class="w-10 h-10 rounded-xl bg-primary-100 text-primary-600 flex items-center justify-center font-bold mb-4">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 mb-2">Instant Simplicity</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">No bloated downloads, accounts, or complex configurations. Open your browser and get answers in milliseconds.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/60">
+                        <div class="w-10 h-10 rounded-xl bg-primary-100 text-primary-600 flex items-center justify-center font-bold mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 mb-2">Absolute Privacy</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Your dataset never leaves your device. All mathematical computations occur 100% locally in your web browser.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/60">
+                        <div class="w-10 h-10 rounded-xl bg-primary-100 text-primary-600 flex items-center justify-center font-bold mb-4">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-900 mb-2">Built for Learning</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Designed specifically to bridge the gap between classroom theory and real-world data visualization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SECTION 4: CONTACT ================= -->
+        <section id="contact-section" class="max-w-3xl w-full mx-auto px-4 sm:px-6 py-12 mb-12">
+            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-12 space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-semibold text-primary-600 uppercase tracking-wider bg-primary-50 px-3 py-1 rounded-full">Get In Touch</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Contact StatMaster Pro Support</h2>
+                    <p class="text-slate-500 text-sm">Have feedback, bug reports, or feature requests? We would love to hear from you.</p>
+                </div>
+
+                <form onsubmit="handleContactSubmit(event)" class="space-y-4 pt-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Your Name</label>
+                            <input type="text" required placeholder="Alex Smith" class="w-full text-sm p-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
+                            <input type="email" required placeholder="alex@university.edu" class="w-full text-sm p-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Subject</label>
+                        <input type="text" required placeholder="Feature Request / Question" class="w-full text-sm p-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Message</label>
+                        <textarea rows="4" required placeholder="Tell us how we can improve StatMaster Pro..." class="w-full text-sm p-3 rounded-xl border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-primary-600/20 transition">
+                        Send Message
+                    </button>
+                </form>
+
+                <div id="contact-success" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-700 text-center font-medium">
+                    <i class="fa-solid fa-circle-check mr-1 text-emerald-500"></i> Thank you! Your message has been sent successfully. We'll get back to you shortly.
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span>StatMaster Pro &bull; Designed for Students & Researchers</span>
+            <div class="flex space-x-6">
+                <a href="#calculator" class="hover:text-slate-600">Calculator</a>
+                <a href="#blog-article" class="hover:text-slate-600">Guide & Blog</a>
+                <a href="#about-section" class="hover:text-slate-600">About Us</a>
+                <a href="#contact-section" class="hover:text-slate-600">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            document.getElementById('contact-success').classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => {
+                document.getElementById('contact-success').classList.add('hidden');
+            }, 5000);
+        }
+
+        // Calculator Logic
+        let currentChart = null;
+        let lastProcessedData = {
+            sorted: [],
+            stats: {}
+        };
+        let activeChartType = 'bar';
+
+        function loadSampleData() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const sampleSets = [
+                "12, 18, 22, 22, 25, 30, 30, 30, 35, 40, 42, 45, 50, 52, 60, 65, 70, 75, 82, 90",
+                "5.2, 4.8, 6.1, 5.5, 5.8, 4.9, 7.2, 6.0, 5.4, 5.1, 6.8, 4.7, 5.9, 6.3",
+                "112, 115, 118, 120, 121, 125, 128, 130, 132, 135, 140, 142, 150, 155, 160",
+                "2, 3, 3, 4, 5, 5, 5, 6, 7, 8, 8, 9, 10, 12, 15, 18, 20"
+            ];
+            const randomSet = sampleSets[Math.floor(Math.random() * sampleSets.length)];
+            document.getElementById('raw-data').value = randomSet;
+            processData();
+        }
+
+        function clearAll() {
+            document.getElementById('raw-data').value = '';
+            document.getElementById('error-box').classList.add('hidden');
+            document.getElementById('dashboard-content').classList.add('hidden');
+            document.getElementById('empty-state').classList.remove('hidden');
+            document.getElementById('data-count-badge').innerText = '0 items';
+            document.getElementById('sorted-data-container').innerHTML = '<span class="text-slate-400 italic">No dataset processed yet...</span>';
+            if (currentChart) {
+                currentChart.destroy();
+                currentChart = null;
+            }
+        }
+
+        function parseInput(text) {
+            if (!text.trim()) return { numbers: [], error: "Dataset is empty." };
+            const cleaned = text.replace(/[\n\r\t,;]/g, ' ');
+            const tokens = cleaned.trim().split(/\s+/);
+            const numbers = [];
+
+            for (let token of tokens) {
+                if (token === "") continue;
+                const num = Number(token);
+                if (isNaN(num)) {
+                    return { numbers: [], error: `Invalid numerical entry found: "${token}". Please enter numbers only.` };
+                }
+                numbers.push(num);
+            }
+
+            if (numbers.length === 0) {
+                return { numbers: [], error: "No valid numbers found in input." };
+            }
+            return { numbers, error: null };
+        }
+
+        function calculateStatistics(arr) {
+            const n = arr.length;
+            const sorted = [...arr].sort((a, b) => a - b);
+            const sum = sorted.reduce((acc, val) => acc + val, 0);
+            const mean = sum / n;
+
+            let median = 0;
+            if (n % 2 === 0) {
+                median = (sorted[n / 2 - 1] + sorted[n / 2]) / 2;
+            } else {
+                median = sorted[Math.floor(n / 2)];
+            }
+
+            const freqMap = {};
+            let maxFreq = 0;
+            sorted.forEach(val => {
+                freqMap[val] = (freqMap[val] || 0) + 1;
+                if (freqMap[val] > maxFreq) maxFreq = freqMap[val];
+            });
+
+            let modes = [];
+            for (let val in freqMap) {
+                if (freqMap[val] === maxFreq) {
+                    modes.push(Number(val));
+                }
+            }
+            
+            let modeStr = "";
+            if (maxFreq === 1 && n > 1) {
+                modeStr = "No mode (all unique)";
+            } else if (modes.length === n) {
+                modeStr = "All values equal frequency";
+            } else {
+                modeStr = modes.join(', ');
+            }
+
+            const min = sorted[0];
+            const max = sorted[n - 1];
+            const range = max - min;
+
+            const varianceSum = sorted.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0);
+            const sampleVariance = n > 1 ? varianceSum / (n - 1) : 0;
+            const sampleSD = Math.sqrt(sampleVariance);
+
+            const getPercentile = (data, p) => {
+                const idx = (p / 100) * (data.length - 1);
+                const lower = Math.floor(idx);
+                const upper = Math.ceil(idx);
+                const weight = idx - lower;
+                if (upper >= data.length) return data[data.length - 1];
+                return data[lower] * (1 - weight) + data[upper] * weight;
+            };
+
+            const q1 = getPercentile(sorted, 25);
+            const q3 = getPercentile(sorted, 75);
+            const iqr = q3 - q1;
+
+            return {
+                n, sorted, sum, mean, median, mode: modeStr, min, max, range,
+                variance: sampleVariance, sd: sampleSD, q1, q3, iqr, freqMap
+            };
+        }
+
+        function processData() {
+            const rawText = document.getElementById('raw-data').value;
+            const errorBox = document.getElementById('error-box');
+            const errorMessage = document.getElementById('error-message');
+            
+            errorBox.classList.add('hidden');
+            const { numbers, error } = parseInput(rawText);
+
+            if (error) {
+                errorMessage.innerText = error;
+                errorBox.classList.remove('hidden');
+                return;
+            }
+
+            const stats = calculateStatistics(numbers);
+            lastProcessedData = { sorted: stats.sorted, stats };
+
+            document.getElementById('data-count-badge').innerText = `${stats.n} items`;
+            document.getElementById('empty-state').classList.add('hidden');
+            document.getElementById('dashboard-content').classList.remove('hidden');
+
+            document.getElementById('stat-n').innerText = stats.n;
+            document.getElementById('stat-mean').innerText = stats.mean.toLocaleString(undefined, {maximumFractionDigits: 4});
+            document.getElementById('stat-median').innerText = stats.median.toLocaleString(undefined, {maximumFractionDigits: 4});
+            document.getElementById('stat-mode').innerText = stats.mode;
+            document.getElementById('stat-range').innerText = stats.range.toLocaleString(undefined, {maximumFractionDigits: 4});
+            document.getElementById('stat-sd').innerText = stats.sd.toLocaleString(undefined, {maximumFractionDigits: 4});
+            document.getElementById('stat-variance').innerText = stats.variance.toLocaleString(undefined, {maximumFractionDigits: 4});
+            document.getElementById('stat-iqr').innerText = stats.iqr.toLocaleString(undefined, {maximumFractionDigits: 4});
+            
+            document.getElementById('stat-min').innerText = stats.min;
+            document.getElementById('stat-q1').innerText = stats.q1.toLocaleString(undefined, {maximumFractionDigits: 2});
+            document.getElementById('stat-q3').innerText = stats.q3.toLocaleString(undefined, {maximumFractionDigits: 2});
+            document.getElementById('stat-max').innerText = stats.max;
+            document.getElementById('stat-sum').innerText = stats.sum.toLocaleString(undefined, {maximumFractionDigits: 4});
+
+            const uniqueValuesCount = Object.keys(stats.freqMap).length;
+            document.getElementById('unique-count').innerText = uniqueValuesCount;
+            document.getElementById('sorted-data-container').innerText = stats.sorted.join(', ');
+
+            renderChart(activeChartType);
+        }
+
+        function switchChart(type) {
+            activeChartType = type;
+            ['bar', 'histogram', 'doughnut', 'boxplot'].forEach(t => {
+                const btn = document.getElementById(`btn-${t}`);
+                if (t === type) {
+                    btn.className = "px-3 py-1.5 rounded-lg transition text-primary-600 bg-white shadow-sm";
+                } else {
+                    btn.className = "px-3 py-1.5 rounded-lg transition text-slate-600 hover:text-slate-900";
+                }
+            });
+
+            if (lastProcessedData.sorted.length > 0) {
+                renderChart(type);
+            }
+        }
+
+        function renderChart(type) {
+            const ctx = document.getElementById('statChart').getContext('2d');
+            const { freqMap, sorted, min, max, q1, median, q3 } = lastProcessedData.stats;
+
+            if (currentChart) {
+                currentChart.destroy();
+            }
+
+            let chartConfig = {};
+
+            if (type === 'bar') {
+                const labels = Object.keys(freqMap);
+                const data = Object.values(freqMap);
+
+                chartConfig = {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Frequency',
+                            data: data,
+                            backgroundColor: '#3b82f6',
+                            borderRadius: 6,
+                            borderSkipped: false,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, ticks: { precision:0 }, grid: { color: '#f1f5f9' } },
+                            x: { grid: { display: false } }
+                        },
+                        animation: { duration: 800 }
+                    }
+                };
+            } else if (type === 'histogram') {
+                const binCount = Math.min(Math.max(Math.floor(Math.sqrt(sorted.length)), 4), 10);
+                const rangeSpan = max - min === 0 ? 1 : max - min;
+                const binWidth = rangeSpan / binCount;
+                
+                const bins = Array(binCount).fill(0);
+                const binLabels = [];
+
+                for (let i = 0; i < binCount; i++) {
+                    const binStart = min + i * binWidth;
+                    const binEnd = binStart + binWidth;
+                    binLabels.push(`${binStart.toFixed(1)} - ${binEnd.toFixed(1)}`);
+                }
+
+                sorted.forEach(val => {
+                    let binIdx = Math.floor((val - min) / binWidth);
+                    if (binIdx >= binCount) binIdx = binCount - 1;
+                    if (binIdx < 0) binIdx = 0;
+                    bins[binIdx]++;
+                });
+
+                chartConfig = {
+                    type: 'bar',
+                    data: {
+                        labels: binLabels,
+                        datasets: [{
+                            label: 'Bin Count',
+                            data: bins,
+                            backgroundColor: '#2563eb',
+                            barPercentage: 0.98,
+                            categoryPercentage: 0.98,
+                            borderRadius: 4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, ticks: { precision:0 }, grid: { color: '#f1f5f9' } },
+                            x: { grid: { display: false } }
+                        },
+                        animation: { duration: 800 }
+                    }
+                };
+            } else if (type === 'doughnut') {
+                const keys = Object.keys(freqMap);
+                let displayKeys = keys;
+                let displayVals = Object.values(freqMap);
+
+                if (keys.length > 7) {
+                    const sortedEntries = Object.entries(freqMap).sort((a,b) => b[1] - a[1]);
+                    displayKeys = sortedEntries.slice(0, 6).map(e => e[0]);
+                    displayVals = sortedEntries.slice(0, 6).map(e => e[1]);
+                    const othersSum = sortedEntries.slice(6).reduce((acc, curr) => acc + curr[1], 0);
+                    displayKeys.push('Others');
+                    displayVals.push(othersSum);
+                }
+
+                chartConfig = {
+                    type: 'doughnut',
+                    data: {
+                        labels: displayKeys,
+                        datasets: [{
+                            data: displayVals,
+                            backgroundColor: ['#2563eb', '#38bdf8', '#6366f1', '#a855f7', '#ec4899', '#f43f5e', '#94a3b8'],
+                            borderWidth: 2,
+                            borderColor: '#ffffff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
+                        },
+                        animation: { duration: 900 }
+                    }
+                };
+            } else if (type === 'boxplot') {
+                chartConfig = {
+                    type: 'bar',
+                    data: {
+                        labels: ['Min to Q1', 'Q1 to Median', 'Median to Q3', 'Q3 to Max'],
+                        datasets: [{
+                            label: 'Spread Range Width',
+                            data: [
+                                (q1 - min),
+                                (median - q1),
+                                (q3 - median),
+                                (max - q3)
+                            ],
+                            backgroundColor: ['#93c5fd', '#60a5fa', '#3b82f6', '#1d4ed8'],
+                            borderRadius: 6,
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { 
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const labelsDesc = [
+                                            `Span from Min (${min}) to Q1 (${q1})`,
+                                            `Span from Q1 (${q1}) to Median (${median})`,
+                                            `Span from Median (${median}) to Q3 (${q3})`,
+                                            `Span from Q3 (${q3}) to Max (${max})`
+                                        ];
+                                        return labelsDesc[context.dataIndex];
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { grid: { color: '#f1f5f9' }, title: { display: true, text: 'Value Interval Distance' } },
+                            y: { grid: { display: false } }
+                        },
+                        animation: { duration: 800 }
+                    }
+                };
+            }
+
+            currentChart = new Chart(ctx, chartConfig);
+        }
+
+        function copySortedData() {
+            const text = lastProcessedData.sorted.join(', ');
+            if (!text) return;
+            navigator.clipboard.writeText(text);
+            alert("Sorted array copied to clipboard!");
+        }
+
+        document.getElementById('raw-data').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                processData();
+            }
+        });
+    </script>
+</body>
+</html>
